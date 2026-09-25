@@ -1,17 +1,12 @@
-pull_request_rules:
-  - name: advc203-0001-appcheck
-    conditions:
-      - base = main
-    actions:
-      post_check:
-        title: advc203-0001-appcheck
-        summary: deliberately failing app-published check
-        success_conditions:
-          - label = advc203-0001-never-applied
-
 merge_protections:
   - name: advc203-0001 override gate
     if:
       - base = main
     success_conditions:
       - "check-success = Rule: advc203-0001-appcheck (post_check)"
+  # Migrated from post_check rule 'advc203-0001-appcheck'. Dropped options with no equivalent: title, summary
+  - name: advc203-0001-appcheck
+    if:
+      - base = main
+    success_conditions:
+      - label = advc203-0001-never-applied
